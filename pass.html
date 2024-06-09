@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Password Generator</h1>
+    <form>
+        <label for="length">Enter the desired password length:</label>
+        <input type="number" id="length" name="length" min="8" max="32">
+        <button type="submit">Generate Password</button>
+    </form>
+    <div id="password"></div>
+
+    <script>
+        const form = document.querySelector('form');
+        const passwordLengthInput = document.querySelector('#length');
+        const passwordDisplay = document.querySelector('#password');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const length = parseInt(passwordLengthInput.value);
+            const password = generatePassword(length);
+            passwordDisplay.textContent = password;
+        });
+
+        function generatePassword(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-={}:<>?';
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return password;
+        }
+    </script>
+</body>
+</html>
